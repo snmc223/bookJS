@@ -36,11 +36,27 @@ class UI {
            <td>${book.title}</td>
            <td>${book.author}</td>
            <td>${book.order}</td>
-           <td><a href="#" class="btn btn-danger btn-sm delete">X</a></td>
+           <td><a href="#" class="btn delete">X</a></td>
         `;
         
         list.appendChild(row);
     }
+
+    static deleteBook(el) {
+        if(el.classList.contains('delete')) {
+            el.parentElement.parentElement.remove();
+        }
+    }
+
+    // <div class="alert">Whatever the message is</div>
+    // static showAlert(message, claseName) {
+    //     const div = document.createElement('div');
+    //     div.className = `alert ${className}`;
+    //     div.appendChild(document.createTextNode(message));
+    //     const container = document.querySelector('.container');
+    //     const form = document.querySelector(`#book-form`);
+    //     container.insertBefore(div, form);
+    // }
 
     static clearFields() {
         document.querySelector('#title').value = '';
@@ -64,6 +80,11 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     const author = document.querySelector('#author').value;
     const order = document.querySelector('#order').value;
 
+    //validate
+    if(title === '' || author === '' || order === '') {
+        alert('Please enter a value into each field.', 'danger')
+    } else {
+
     //Instatiate book
     const book = new Book(title, author, order);
 
@@ -72,9 +93,12 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
     //clearing fields
     UI.clearFields();
+    }
 
 });
 
 //Event: Remove a book
-
+document.querySelector('#book-list').addEventListener('click', (e) => {
+    UI.deleteBook(e.target)
+});
 
