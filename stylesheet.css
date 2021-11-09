@@ -1,0 +1,21 @@
+.form-group {
+    display: flex;
+    flex-flow: row wrap;
+}
+.table {
+    width: 75%
+}
+th {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    background-color: darkcyan;
+    color: white;
+}
+#book-list {
+    border-bottom: 1px solid #ddd;
+}
+#book-list:hover {
+    background-color: cadetblue;
+}
+
