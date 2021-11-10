@@ -9,20 +9,7 @@ class Book{
 //UI Class: Handle UI Tasks
 class UI {
     static displayBooks() {
-        const StoredBooks = [
-            {
-                title: 'Dune',
-                author: 'Frank Herbert',
-                order: '1'
-            },
-            {
-                title: 'Dune Messiah',
-                author: 'Frank Herbert',
-                order: '2'
-            }
-        ];
-
-        const books = StoredBooks;
+        const books = Store.getBooks();
 
         books.forEach((book) => UI.addBookToList(book));
     }
@@ -65,7 +52,37 @@ class UI {
     }
 }
 
-//Store Class: Handles Storage
+// Store Class: Handles Storage
+class Store {
+    static getBooks() {
+        let books;
+        if(localStorage.getItem('books') === null) {
+            books = [];
+        } else {
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+
+        return books;
+    }
+
+    static addBook(book) {
+        const books = Storage.getBooks();
+        books.push(book);
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+
+    static removeBook(order) {
+        const books = Store.getBooks();
+
+        books.forEach((book, index) => {
+            if(book.order === order) {
+                books.splice(index, 1);
+            }
+        });
+
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+}
 
 //Event: Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
@@ -91,6 +108,9 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     //Add book to UI
     UI.addBookToList(book);
 
+    //Add book to store
+    Store.addBook(book);
+
     //clearing fields
     UI.clearFields();
     }
@@ -101,4 +121,31 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 document.querySelector('#book-list').addEventListener('click', (e) => {
     UI.deleteBook(e.target)
 });
+    
+    //remove book from store
+    Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+
+
+
+
+
+
+
+// let express = require('express');
+// let app = express();
+
+// let router = express.Router();
+
+// router.get('/', function (req, res, next) {
+//     res.send("Book");
+// });
+
+// app.use('/api/', router)
+
+// var server = app.listen(4000, function() {
+//     console.log('Node server is running on http://localhost:4000')
+// })
+
+
+
 

@@ -1,0 +1,24 @@
+{
+  "name": "bookjs",
+  "version": "1.0.0",
+  "description": "REST APIs for Book List",
+  "main": "book.js",
+  "scripts": {
+    "start": "nodemon book.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/snmc223/bookJS.git"
+  },
+  "author": "Nicole McGovern",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/snmc223/bookJS/issues"
+  },
+  "homepage": "https://github.com/snmc223/bookJS#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.15"
+  }
+}
