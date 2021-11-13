@@ -38,11 +38,12 @@ class UI {
     // <div class="alert">Whatever the message is</div>
     // static showAlert(message, claseName) {
     //     const div = document.createElement('div');
-    //     div.className = `alert ${className}`;
+    //     div.className = `alert alert-${className}`;
     //     div.appendChild(document.createTextNode(message));
     //     const container = document.querySelector('.container');
     //     const form = document.querySelector(`#book-form`);
     //     container.insertBefore(div, form);
+    //setTimeout(() => document.querySelector('.alert').remove(), 3000);
     // }
 
     static clearFields() {
@@ -66,7 +67,7 @@ class Store {
     }
 
     static addBook(book) {
-        const books = Storage.getBooks();
+        const books = Store.getBooks();
         books.push(book);
         localStorage.setItem('books', JSON.stringify(books));
     }
@@ -99,7 +100,7 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 
     //validate
     if(title === '' || author === '' || order === '') {
-        alert('Please enter a value into each field.', 'danger')
+        alert('Please enter a value into each field.');
     } else {
 
     //Instatiate book
@@ -120,10 +121,13 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
 //Event: Remove a book
 document.querySelector('#book-list').addEventListener('click', (e) => {
     UI.deleteBook(e.target)
+
+    //Remove book from store
+    Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
 });
     
     //remove book from store
-    Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
+    // Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
 
 
 
