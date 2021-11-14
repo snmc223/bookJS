@@ -35,17 +35,6 @@ class UI {
         }
     }
 
-    // <div class="alert">Whatever the message is</div>
-    // static showAlert(message, claseName) {
-    //     const div = document.createElement('div');
-    //     div.className = `alert alert-${className}`;
-    //     div.appendChild(document.createTextNode(message));
-    //     const container = document.querySelector('.container');
-    //     const form = document.querySelector(`#book-form`);
-    //     container.insertBefore(div, form);
-    //setTimeout(() => document.querySelector('.alert').remove(), 3000);
-    // }
-
     static clearFields() {
         document.querySelector('#title').value = '';
         document.querySelector('#author').value = '';
@@ -127,7 +116,7 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
 });
 
 
-  // OpenWeatherMap API.
+  // OpenWeatherMap API
 const api = '1617ef01375e4b5e86dfad92fab32dcc'; 
 
 const iconImg = document.getElementById('weather-icon');
