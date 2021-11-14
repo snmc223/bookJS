@@ -203,9 +203,6 @@ const countdown = () => {
     document.querySelector('.minute').innerText = textMinute;
     document.querySelector('.second').innerText = textSecond;
 
-    if(gap < 10000) {
-        
-    }
 };
 
 setInterval(countdown, 1000);
