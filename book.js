@@ -125,31 +125,89 @@ document.querySelector('#book-list').addEventListener('click', (e) => {
     //Remove book from store
     Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
 });
-    
-    //remove book from store
-    // Store.removeBook(e.target.parentElement.previousElementSibling.textContent);
 
 
+  // OpenWeatherMap API.
+const api = '1617ef01375e4b5e86dfad92fab32dcc'; 
 
+const iconImg = document.getElementById('weather-icon');
+const loc = document.querySelector('#location');
+const tempC = document.querySelector('.cel');
+const tempF = document.querySelector('.far');
+const desc = document.querySelector('.desc');
+const sunriseDOM = document.querySelector('.sunrise');
+const sunsetDOM = document.querySelector('.sunset');
 
+window.addEventListener('load', () => {
+  let long;
+  let lat;
+  // Accesing Geolocation of User
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      // Storing Longitude and Latitude in variables
+      long = position.coords.longitude;
+      lat = position.coords.latitude;
+      const base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${api}&units=metric`;
 
+      // Using fetch to get data
+      fetch(base)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          const { temp } = data.main;
+          const place = data.name;
+          const { description, icon } = data.weather[0];
+          const { sunrise, sunset } = data.sys;
 
+          const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+          const fahrenheit = (temp * 9) / 5 + 32;
 
-// let express = require('express');
-// let app = express();
+          // Converting time to GMT
+          const sunriseGMT = new Date(sunrise * 1000);
+          const sunsetGMT = new Date(sunset * 1000);
 
-// let router = express.Router();
+          // Interacting with DOM to show data
+          iconImg.src = iconUrl;
+          loc.textContent = `${place}`;
+          desc.textContent = `${description}`;
+          tempC.textContent = `${temp.toFixed(2)} °C`;
+          tempF.textContent = `${fahrenheit.toFixed(2)} °F`;
+          sunriseDOM.textContent = `${sunriseGMT.toLocaleDateString()}, ${sunriseGMT.toLocaleTimeString()}`;
+          sunsetDOM.textContent = `${sunsetGMT.toLocaleDateString()}, ${sunsetGMT.toLocaleTimeString()}`;
+        });
+    });
+  }
+});
 
-// router.get('/', function (req, res, next) {
-//     res.send("Book");
-// });
+//countdown
+const countdown = () => {
+    const countDate = new Date('December 31, 2021 00:00:00').getTime();
+    const now = new Date().getTime();
+    const gap = countDate - now;
 
-// app.use('/api/', router)
+    //how time works
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-// var server = app.listen(4000, function() {
-//     console.log('Node server is running on http://localhost:4000')
-// })
+    //calcutate the time
+    const textDay = Math.floor(gap / day);
+    const textHour = Math.floor((gap % day) / hour);
+    const textMinute = Math.floor((gap % hour) / minute);
+    const textSecond = Math.floor((gap % minute) / second);
 
+    document.querySelector('.day').innerText = textDay;
+    document.querySelector('.hour').innerText = textHour;
+    document.querySelector('.minute').innerText = textMinute;
+    document.querySelector('.second').innerText = textSecond;
 
+    if(gap < 10000) {
+        
+    }
+};
 
-
+setInterval(countdown, 1000);
+        
+            
