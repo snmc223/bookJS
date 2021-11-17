@@ -107,9 +107,10 @@ h3 {
     margin-right: 10px;
     margin-left: 10px;
 }
-#convert {
+#convert, p {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 
 @media only screen and (max-width: 600px) {
     #location {
