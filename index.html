@@ -56,7 +56,7 @@
     </div>
 
     <section class="finish-reading">
-        <h2>Countdown to finish my reading list:</h2>
+        <h2 id="reading-list">Countdown to finish my reading list:</h2>
         <div class="countdown">
             <div class="container-day">
                 <h3 class="day">Time</h3>
@@ -76,6 +76,12 @@
             </div>
         </div>
     </section>
+
+    <div id="convert">
+        <label>Days</label>
+        <input id="inputDays" type="number" placeholder="Days" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+    </div>
+    <p>Seconds: <span id="outputSeconds"></span></p>
 
     <script src='book.js'></script>
 </body>

@@ -195,5 +195,9 @@ const countdown = () => {
 };
 
 setInterval(countdown, 1000);
-        
+
+//converting days to seconds
+function LengthConverter(valNum) {
+    document.getElementById("outputSeconds").innerHTML=valNum*86400;
+}
             
